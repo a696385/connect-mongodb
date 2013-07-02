@@ -21,7 +21,7 @@ testosterone
       connect_mongodb({db: db, setInterval: -1}, funk.add(assert.ifError));
       connect_mongodb({server_config: server_config2, setInterval: -1}, funk.add(assert.ifError));
       connect_mongodb({url: url, setInterval: -1}, funk.add(assert.ifError));
-      connect_mongodb({url: urls, auto_reconnect: true, native_parser: true}, funk.add(assert.ifError));
+      connect_mongodb({url: urls, auto_reconnect: true, native_parser: true, safe: true}, funk.add(assert.ifError));
       funk.run(done);
     });
   })
