@@ -4,9 +4,11 @@ var testosterone = require('testosterone')({title: 'models/advertiser'})
   , Db = require('mongodb').Db
   , Server = require('mongodb').Server
   , server_config = new Server('localhost', 27017, {auto_reconnect: true, native_parser: true})
+  , server_config2 = new Server('localhost', 27017, {auto_reconnect: true, native_parser: true})
   , url = 'mongodb://localhost:27017/test'
   , connect_mongodb = require('..')
-  , db = new Db('test', server_config, {});
+  , db = new Db('test', server_config, {})
+  , urls = 'mongodb://test:test@localhost:27017/test,mongodb://test:test@localhost:27017/test,mongodb://test:test@localhost:27017/test' ;
 
 testosterone
 
@@ -17,8 +19,9 @@ testosterone
       connect_mongodb(null, funk.add(assert.ok));
       connect_mongodb({db: null}, funk.add(assert.ok));
       connect_mongodb({db: db, setInterval: -1}, funk.add(assert.ifError));
-      connect_mongodb({server_config: server_config, setInterval: -1}, funk.add(assert.ifError));
+      connect_mongodb({server_config: server_config2, setInterval: -1}, funk.add(assert.ifError));
       connect_mongodb({url: url, setInterval: -1}, funk.add(assert.ifError));
+      connect_mongodb({url: urls, auto_reconnect: true, native_parser: true}, funk.add(assert.ifError));
       funk.run(done);
     });
   })
